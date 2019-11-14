@@ -17,10 +17,10 @@ public class Firewall {
     Map<Integer, List<String>> map4;
 
     public Firewall(String filename){
-        map1=new HashMap<>();   //tcp inbound
-        map2=new HashMap<>();   //tcp outbound
-        map3=new HashMap<>();   //udp inbound
-        map4=new HashMap<>();   //udp outbound
+        map1=new HashMap<Integer, List<String>>();   //tcp inbound
+        map2=new HashMap<Integer, List<String>>();   //tcp outbound
+        map3=new HashMap<Integer, List<String>>();   //udp inbound
+        map4=new HashMap<Integer, List<String>>();   //udp outbound
         try {
             read_file(filename);
         } catch (FileNotFoundException e) {
@@ -77,6 +77,8 @@ public class Firewall {
     }
 
     public void insert_port_ip(int type, int port, String ip_address){
+
+        // Store rules in different map based on direction and protocol
         switch (type){
             case 1:
                 if(map1.containsKey(port)){
@@ -139,6 +141,8 @@ public class Firewall {
     }
 
     public boolean accept_packet(String direction, String protocol, int port, String ip_address){
+
+//        Use different map to handle based on input direction and protocol
         switch (direction){
 
             case "inbound":
@@ -223,6 +227,8 @@ public class Firewall {
 
     public static void main(String[] args) throws FileNotFoundException {
         Firewall f = new Firewall("rules_manualTestUsed.csv");
+
+//        Test
         System.out.println(f.accept_packet("inbound", "tcp", 1, "1.1.1.1"));
         System.out.println(f.accept_packet("inbound", "tcp", 9, "255.255.255.254"));
         System.out.println(f.accept_packet("inbound", "tcp", 88, "192.168.1.2"));
