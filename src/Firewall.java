@@ -222,7 +222,7 @@ public class Firewall {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        Firewall f = new Firewall("rules.csv");
+        Firewall f = new Firewall("rules_manualTestUsed.csv");
         System.out.println(f.accept_packet("inbound", "tcp", 1, "1.1.1.1"));
         System.out.println(f.accept_packet("inbound", "tcp", 9, "255.255.255.254"));
         System.out.println(f.accept_packet("inbound", "tcp", 88, "192.168.1.2"));
