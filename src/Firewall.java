@@ -126,7 +126,7 @@ public class Firewall {
                 else{
                     List<String> tmp=new ArrayList<>();
                     tmp.add(ip_address);
-                    map1.put(port,tmp);
+                    map4.put(port,tmp);
                 }
                 break;
 
@@ -225,6 +225,13 @@ public class Firewall {
         Firewall f = new Firewall("rules.csv");
         System.out.println(f.accept_packet("inbound", "tcp", 1, "1.1.1.1"));
         System.out.println(f.accept_packet("inbound", "tcp", 9, "255.255.255.254"));
-
+        System.out.println(f.accept_packet("inbound", "tcp", 88, "192.168.1.2"));
+        System.out.println(f.accept_packet("inbound", "udp", 2200, "192.168.2.1"));
+        System.out.println(f.accept_packet("outbound", "tcp", 2811, "192.168.10.11"));
+        System.out.println(f.accept_packet("outbound", "udp", 65535, "7.7.7.7"));
+        System.out.println(f.accept_packet("outbound", "udp", 65535, "1.1.1.1"));
+        System.out.println(f.accept_packet("outbound", "udp", 1, "255.255.255.255"));
+        System.out.println(f.accept_packet("inbound", "tcp", 789, "192.168.1.2"));
+        System.out.println(f.accept_packet("outbound", "udp", 4396, "52.12.48.92"));
     }
 }
